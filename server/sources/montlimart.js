@@ -9,23 +9,25 @@ const cheerio = require('cheerio');
 const parse = data => {
   const $ = cheerio.load(data);
 
-  return $('.productList-container .productList')
+  return $('.category-products .products-grid .item')
     .map((i, element) => {
       const name = $(element)
-        .find('.productList-title')
+        .find('.product-name')
         .text()
         .trim()
-        .replace(/\s/g, ' ');
+        .replace(/\s/, ' ')
+      
       const price = parseInt
       (
         $(element)
-          .find('.productList-price')
+          .find('.price')
           .text()
       );
-      const link ='https://www.dedicatedbrand.com'+$(element)
-        .find('.productList-link')
+      const link =$(element)
+        .find('.product-name a')
         .attr('href')
-      const brand='Dedicated'
+      
+      const brand='Montlimart'
 
       return {name, price, link, brand};
     })
