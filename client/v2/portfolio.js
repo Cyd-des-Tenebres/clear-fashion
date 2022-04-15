@@ -35,10 +35,10 @@ const setCurrentProducts = ({result, meta}) => {
 const fetchProducts = async (page = 1, size = 12, brand=currentBrand) => {
   try {
     
-    //console.log(brand)
+    console.log(brand)
     
     let response= await fetch(
-      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+      `server-ivory-zeta.vercel.app/products/search?limit=${size}`
     );
     
     //console.log(response)
@@ -49,7 +49,7 @@ const fetchProducts = async (page = 1, size = 12, brand=currentBrand) => {
       //console.log("In the if")
       
       response = await fetch(
-        `https://clear-fashion-api.vercel.app?page=${page}&size=${size}&brand=${brand}`
+        `server-ivory-zeta.vercel.app/products/search?limit=${size}&brand=${brand}`
       );
       
       //console.log(response)
@@ -142,6 +142,7 @@ selectShow.addEventListener('change', async (event) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
+  console.log(products)
   allProducts=await fetchProducts(1,139)
   createBrandList(allProducts)
   setCurrentProducts(products);
